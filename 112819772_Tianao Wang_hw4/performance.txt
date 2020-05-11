@@ -1,0 +1,78 @@
+112819772 Tianao Wang
+
+Environment
+VB + Cloudera Quickstart VM + jdk1.8 + hadoop2.6 + spark2.4.5
+
+Covid19_1
+Running time: map 8910ms, reduce 8932ms
+
+Command:
+javac -cp `hadoop classpath` Covid19_1.java -d build -Xlint
+
+jar -cvf Covid19_1.jar -C build/ .
+
+hdfs dfs -rm -r /cse532/output
+
+hadoop jar Covid19_1.jar Covid19_1 /cse532/input/covid19_full_data.csv true /cse532/output/
+
+hdfs dfs -cat /cse532/output/*
+
+Covid19_2
+Running time: map 33118ms, reduce 20796ms
+
+Command:
+javac -cp `hadoop classpath` Covid19_2.java -d build -Xlint
+
+jar -cvf Covid19_2.jar -C build/ .
+
+hdfs dfs -rm -r /cse532/output
+
+hadoop jar Covid19_2.jar Covid19_2 /cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /cse532/output/
+
+hdfs dfs -cat /cse532/output/*
+
+Covid19_3
+Running time: map 17927ms, reduce 28178ms
+
+Command:
+javac -cp `hadoop classpath` Covid19_3.java -d build -Xlint
+
+jar -cvf Covid19_3.jar -C build/ .
+
+hdfs dfs -rm -r /cse532/output
+
+hadoop jar Covid19_3.jar Covid19_3 /cse532/input/covid19_full_data.csv hdfs://quickstart.cloudera:8020/cse532/cache/populations.csv /cse532/output/
+
+hdfs dfs -cat /cse532/output/*
+
+SparkCovid19_1
+Running time: 5962ms
+
+Command:
+javac -cp "/home/cloudera/Desktop/spark/spark-2.4.5-bin-hadoop2.7/jars/*" SparkCovid19_1.java -d build -Xlint
+
+jar -cvf SparkCovid19_1.jar -C build/ .
+
+hdfs dfs -rm -r /cse532/output
+
+spark-submit --class SparkCovid19_1 SparkCovid19_1.jar hdfs://quickstart.cloudera:8020/cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 hdfs://quickstart.cloudera:8020/cse532/output/
+
+hdfs dfs -cat /cse532/output/*
+
+SparkCovid19_2
+Running time: 25406ms
+
+Command:
+javac -cp "/home/cloudera/Desktop/spark/spark-2.4.5-bin-hadoop2.7/jars/*" SparkCovid19_2.java -d build -Xlint
+
+jar -cvf SparkCovid19_2.jar -C build/ .
+
+hdfs dfs -rm -r /cse532/output
+
+spark-submit --class SparkCovid19_2 SparkCovid19_2.jar hdfs://quickstart.cloudera:8020/cse532/input/covid19_full_data.csv hdfs://quickstart.cloudera:8020/cse532/cache/populations.csv hdfs://quickstart.cloudera:8020/cse532/output/
+
+hdfs dfs -cat /cse532/output/*
+
+
+
+

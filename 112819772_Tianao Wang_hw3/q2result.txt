@@ -1,0 +1,3 @@
+ FACILITYNAME                   GEOLOCATION                  DISTANCE           
+ ------------------------------ ---------------------------- ------------------ 
+ Long Island Community Hospital POINT (40.778915 -72.978035) 1.4403324260351813
